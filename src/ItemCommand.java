@@ -1,12 +1,3 @@
-public class ItemCommand implements Command {
-    Hero hero;
+public abstract class ItemCommand implements Command {
 
-    ItemCommand(Hero hero){
-        this.hero = hero;
-    }
-
-    @Override
-    public void execute() {
-
-    }
 }
