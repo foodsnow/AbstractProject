@@ -13,6 +13,8 @@ public class Hero implements GameUnit {
     public void setIsDefenced(boolean state){isDefence = state;}
 
     public double useMagic(){mana -= 50; return magicDamage;}
+    public double getMana(){return this.mana;}
+    public void setMana(double mana){this.mana = mana;}
     @Override
     public double getAttack() {return this.attack;}
     @Override
