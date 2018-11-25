@@ -11,5 +11,6 @@ public class AttackCommand implements Command {
     public void execute() {
         double damege = hero.getDamage();
         monster.setHealth(monster.getHealth() - damege);
+        System.out.println("Attack was used -"+damege);
     }
 }

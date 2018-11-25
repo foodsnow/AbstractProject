@@ -1,10 +1,18 @@
 public class Hero implements GameUnit {
-    private double attack = 50,
+    private double attack = 5,
                     defence = 250,
                     health = 100,
-                    criticalChance = 0.001;
+                    criticalChance = 0.001,
+                    mana = 100,
+                    magicDamage = 12;
+    private boolean isDefence = false,
+                    isDead = false;
 
 
+    public boolean isDefenced(){return isDefence;}
+    public void setIsDefenced(boolean state){isDefence = state;}
+
+    public double useMagic(){mana -= 50; return magicDamage;}
     @Override
     public double getAttack() {return this.attack;}
     @Override
@@ -28,6 +36,6 @@ public class Hero implements GameUnit {
 
     @Override
     public double getDamage() {
-        return 0;
+        return this.attack;
     }
 }

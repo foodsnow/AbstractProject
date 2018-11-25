@@ -7,6 +7,7 @@ public class DefenceCommand implements Command {
 
     @Override
     public void execute() {
-
+        this.hero.setIsDefenced(true);
+        System.out.println("Defence was used");
     }
 }
