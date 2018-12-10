@@ -2,17 +2,23 @@ public class Hero implements GameUnit {
     private double attack = 5,
                     defence = 250,
                     health = 100,
-                    criticalChance = 0.001,
                     mana = 100,
-                    magicDamage = 12;
+                    magicDamage = 12,
+                    gotDamage = 0;
+    private int miss = 5,
+                criticalChance = 5;
     private boolean isDefence = false,
-                    isDead = false;
+                    isDead = false,
+                    isMiss = false,
+                    isCritical = false;
+    private Inventory inventory;
 
 
-    public boolean isDefenced(){return isDefence;}
-    public void setIsDefenced(boolean state){isDefence = state;}
+    Hero(){
+        inventory = new Inventory(this);
+    }
 
-    public double useMagic(){mana -= 50; return magicDamage;}
+
     public double getMana(){return this.mana;}
     public void setMana(double mana){this.mana = mana;}
     @Override
@@ -26,7 +32,7 @@ public class Hero implements GameUnit {
     @Override
     public void setAttack(double attack) { this.attack = attack;}
     @Override
-    public void setCriticalChance(double chance) {this.criticalChance = chance;}
+    public void setCriticalChance(int chance) {this.criticalChance = chance;}
     @Override
     public void increaseCriticalChance(double chance) {this.criticalChance += chance;}
     @Override
@@ -34,10 +40,87 @@ public class Hero implements GameUnit {
     @Override
     public void setDefence(double defence) {this.defence = defence;}
     @Override
-    public void setHealth(double health) {this.health = health;}
+    public void setHealth(double health) {
+        double hpPlus = defence/1000*1.5;
+        this.health = health + hpPlus;
+        if(this.health <= 0) {
+            this.isDead = true;
+            this.health = 0;
+            System.out.println("Hero is dead");
+        }
+    }
 
     @Override
     public double getDamage() {
-        return this.attack;
+        int mm = (int)(Math.random()*6);
+        if (mm != this.miss){
+            int cc = (int)(Math.random()*6);
+            if (cc == this.criticalChance){
+                isCritical = true;
+                System.out.println("Critical");
+                return this.attack*1.2;
+            }
+            else
+                return this.attack;
+        }
+        else{
+            isMiss = true;
+            System.out.println("Miss");
+            return 0;
+        }
+    }
+    public void setGotDamage(double d){
+        gotDamage = d;
+    }
+    public double getGotDamage(){
+        return gotDamage;
+    }
+
+    public boolean isCritical(){
+        return isCritical;
+    }
+    public void cleanCritical(){
+        isCritical = false;
+    }
+
+    public boolean isMissed(){
+        return isMiss;
+    }
+    public void cleanMiss(){
+        isMiss = false;
+    }
+    public void cleanAll(){
+        this.cleanCritical();
+        this.cleanMiss();
+    }
+
+    public boolean isEnoughMana(){
+        return mana >= 40;
+    }
+
+    public double useMagic(){
+        int mm = (int)(Math.random()*6);
+        if (mm != miss){
+            mana -= 40;
+            return this.magicDamage;
+        }
+        else{
+            isMiss = true;
+            return 0;
+        }
+    }
+
+    public boolean isDefenced(){
+        return isDefence;
+    }
+
+    public void setIsDefenced(boolean state){
+        isDefence = state;
+    }
+    public Inventory getInventory() {
+        return inventory;
+    }
+    public boolean isDead(){
+        return this.isDead;
     }
 }

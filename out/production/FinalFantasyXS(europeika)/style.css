@@ -1,0 +1,78 @@
+@font-face {
+    font-family: 'Press Start 2P', cursive;
+    src: url('font/PressStart2P-Regular.ttf');
+}
+.maiN{
+	-fx-background-image: url("images/game_back.png");
+}
+.box{
+	-fx-background-repeat: stretch;
+	-fx-background-position: center center;
+	-fx-background-size: cover;
+	-fx-border-color: black;
+	-fx-border-width: 5;
+}
+.button{
+	-fx-background-color: transparent;
+	-fx-text-fill: white;
+	-fx-font-size: 20;
+	-fx-font-family: 'Press Start 2P', cursive;
+}
+.button:hover{
+	-fx-text-fill:yellow;
+}
+.mana{
+	-fx-accent: blue;
+}
+.health{
+	-fx-accent: red;
+}
+.bottomNav{
+	-fx-background-color: linear-gradient(to bottom right, #000099 26%, #000000 109%);
+	-fx-border-color: #e6e8ed;
+	-fx-border-width: 5;
+	-fx-border-radius: 5;
+	-fx-background-radius: 5;
+	-fx-pref-width: 50%;
+	-fx-padding: 0 0 5 0;
+	-fx-alignment: top-left;
+}
+.cells{
+	-fx-alignment: center;
+}
+.stat{
+	-fx-padding: 30 0 0 0;
+}
+.ver{
+	-fx-alignment: bottom-center;
+}
+.allBar{
+	-fx-padding: 10;
+	-fx-alignment: top-left;
+}
+.left{
+	-fx-padding: 0 80 50 0;
+}
+.right{
+	-fx-padding: 0 0 50 80;
+}
+.miss{
+	-fx-text-fill: white;
+	-fx-font-family: 'Press Start 2P', cursive;
+	-fx-font-size: 25;
+}
+.damage{
+	-fx-text-fill: red;
+	-fx-font-family: 'Press Start 2P', cursive;
+	-fx-font-size: 25;
+}
+.mana_damage{
+	-fx-text-fill: blue;
+	-fx-font-family: 'Press Start 2P', cursive;
+	-fx-font-size: 25;
+}
+.critical{
+	-fx-text-fill: yellow;
+	-fx-font-family: 'Press Start 2P', cursive;
+	-fx-font-size: 25;
+}

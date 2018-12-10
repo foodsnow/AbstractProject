@@ -9,8 +9,12 @@ public class MagicCommand implements Command {
 
     @Override
     public void execute() {
-        double magicDamage = this.hero.useMagic();
-        this.monster.setHealth(monster.getHealth() - magicDamage);
-        System.out.println("Magic Spell -50");
+        if(hero.isEnoughMana()) {
+            double magicDamage = this.hero.useMagic();
+            monster.setGotDamage(magicDamage);
+            this.monster.setHealth(monster.getHealth() - magicDamage);
+            System.out.println("Magic Spell "+hero.getMana());
+        }else
+            System.out.println("Not enough mana");
     }
 }

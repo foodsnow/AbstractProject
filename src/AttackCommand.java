@@ -10,6 +10,7 @@ public class AttackCommand implements Command {
     @Override
     public void execute() {
         double damege = hero.getDamage();
+        monster.setGotDamage(damege);
         monster.setHealth(monster.getHealth() - damege);
         System.out.println("Attack was used -"+damege);
     }

@@ -7,6 +7,7 @@ public class HealthItemCommand extends ItemCommand {
 
     @Override
     public void execute() {
-
+        Inventory inventory = hero.getInventory();
+        inventory.useHp();
     }
 }

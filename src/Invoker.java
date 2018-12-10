@@ -2,7 +2,7 @@ public class Invoker {
     Command[] commands;
 
     Invoker(){
-        commands = new Command[4];
+        commands = new Command[5];
 
         Command no = new NoCommand();
         for (int i = 0; i < commands.length; i++){
@@ -15,6 +15,7 @@ public class Invoker {
     }
 
     public void ButtonWasPressed(int i){
+
         commands[i].execute();
     }
 
