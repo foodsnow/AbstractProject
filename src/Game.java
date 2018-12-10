@@ -32,6 +32,7 @@ public class Game extends Application {
     public void start(Stage primaryStage) throws Exception {
         System.out.println(hero.getClass().toString());
 
+        //classes
         Monster monster = factoryMonster.getNewMonster();
 
         Invoker invoker = new Invoker();
@@ -46,7 +47,7 @@ public class Game extends Application {
         invoker.setCommand(2, magicCommand);
         invoker.setCommand(3, healthCommand);
         invoker.setCommand(4, manaCommand);
-
+        //
 
         ImageView hero_image = new ImageView("images/hero1.gif");
         ImageView monster_image = factoryMonster.getImage();
@@ -94,17 +95,17 @@ public class Game extends Application {
         Label damage_monster = new Label("");
         Label miss_monster = new Label("Miss");
 
-        Line line1 = new Line(0 , 0, 25, 0);
+        Line line1 = new Line(0 , 0, 20, 0);
         line1.setVisible(false);
-        Line line2 = new Line(0,0,25,0);
+        Line line2 = new Line(0,0,20,0);
         line2.setVisible(false);
-        Line line3 = new Line(0,0,25,0);
+        Line line3 = new Line(0,0,20,0);
         line3.setVisible(false);
-        Line line4 = new Line(0 , 0, 25, 0);
+        Line line4 = new Line(0 , 0, 20, 0);
         line4.setVisible(false);
-        Line line5 = new Line(0,0,25,0);
+        Line line5 = new Line(0,0,20,0);
         line5.setVisible(false);
-        Line line6 = new Line(0,0,25,0);
+        Line line6 = new Line(0,0,20,0);
         line6.setVisible(false);
         StackPane pane1 = new StackPane();
         pane1.getChildren().addAll(line1,miss);
@@ -154,6 +155,7 @@ public class Game extends Application {
         vBox6.getChildren().addAll(monster_hp);
         hBox2.getChildren().addAll(vBox4,vBox5,vBox6);
 
+        //Class list
         borderPane.getStyleClass().add("maiN");
         action_scene.getStyleClass().addAll("box");
         manaBar.getStyleClass().addAll("mana");
@@ -179,16 +181,23 @@ public class Game extends Application {
         damage_monster.getStyleClass().add("damage");
         stat1.getStyleClass().addAll("cells","stat");
         stat2.getStyleClass().addAll("cells","stat");
+        //
 
         manaBar.setProgress(100);
         healthBar.setProgress(100);
         monsterHealthBar.setProgress(100);
 
         action_scene.setGridLinesVisible(true);
+
+        //Binding
         cell1.prefWidthProperty().bind(action_scene.widthProperty());
         cell2.prefWidthProperty().bind(action_scene.widthProperty());
         cell1.prefHeightProperty().bind(action_scene.heightProperty());
         cell2.prefHeightProperty().bind(action_scene.heightProperty());
+        vBox1.prefWidthProperty().bind(cell1.widthProperty().divide(2));
+        stat1.prefWidthProperty().bind(cell1.widthProperty().divide(2));
+        vBox2.prefWidthProperty().bind(cell2.widthProperty().divide(2));
+        stat2.prefWidthProperty().bind(cell2.widthProperty().divide(2));
         vBox3.prefWidthProperty().bind(scene.widthProperty().divide(4));
         vBox3.prefHeightProperty().bind(scene.heightProperty().divide(4));
         hBox2.prefWidthProperty().bind(scene.widthProperty().divide(4).multiply(3));
@@ -334,7 +343,7 @@ public class Game extends Application {
     }
 
     public FadeTransition trans(Label text){
-        FadeTransition transition = new FadeTransition(Duration.millis(500), text);
+        FadeTransition transition = new FadeTransition(Duration.millis(350), text);
         text.setOpacity(0);
         transition.setFromValue(0);
         transition.setToValue(1);

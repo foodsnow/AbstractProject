@@ -42,6 +42,8 @@
 }
 .stat{
 	-fx-padding: 30 0 0 0;
+	-fx-pref-width: 100;
+	-fx-border-color: black;
 }
 .ver{
 	-fx-alignment: bottom-center;
