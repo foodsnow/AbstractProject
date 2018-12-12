@@ -9,8 +9,12 @@
 	-fx-background-repeat: stretch;
 	-fx-background-position: center center;
 	-fx-background-size: cover;
-	-fx-border-color: black;
-	-fx-border-width: 5;
+}
+.text{
+	-fx-background-color: transparent;
+	-fx-text-fill: white;
+	-fx-font-size: 20;
+	-fx-font-family: 'Press Start 2P', cursive;
 }
 .button{
 	-fx-background-color: transparent;
@@ -53,10 +57,10 @@
 	-fx-alignment: top-left;
 }
 .left{
-	-fx-padding: 0 80 50 0;
+	-fx-padding: 0 0 50 0;
 }
 .right{
-	-fx-padding: 0 0 50 80;
+	-fx-padding: 0 0 50 0;
 }
 .miss{
 	-fx-text-fill: white;
@@ -68,8 +72,8 @@
 	-fx-font-family: 'Press Start 2P', cursive;
 	-fx-font-size: 25;
 }
-.mana_damage{
-	-fx-text-fill: blue;
+.stunned{
+	-fx-text-fill: yellow;
 	-fx-font-family: 'Press Start 2P', cursive;
 	-fx-font-size: 25;
 }
@@ -77,4 +81,30 @@
 	-fx-text-fill: yellow;
 	-fx-font-family: 'Press Start 2P', cursive;
 	-fx-font-size: 25;
+}
+.shield{
+	-fx-alignment: bottom-center;
+}
+.toLeft{
+	-fx-alignment: center-left;
+	-fx-padding: 2;
+	-fx-spacing: 5;
+}
+.toRight{
+	-fx-alignment: center-right;
+	-fx-padding: 2;
+	-fx-spacing: 5;
+}
+.jen{
+	-fx-font-family: 'Press Start 2P', cursive;
+	-fx-font-size: 150;
+	-fx-pref-height: 150;
+	-fx-text-fill: white;
+}
+.over{
+	-fx-alignment: center;
+	background-color: black;
+}
+.container{
+	-fx-alignment: center;
 }

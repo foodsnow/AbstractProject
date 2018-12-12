@@ -41,8 +41,7 @@ public class Hero implements GameUnit {
     public void setDefence(double defence) {this.defence = defence;}
     @Override
     public void setHealth(double health) {
-        double hpPlus = defence/1000*1.5;
-        this.health = health + hpPlus;
+        this.health = health;
         if(this.health <= 0) {
             this.isDead = true;
             this.health = 0;
@@ -70,7 +69,14 @@ public class Hero implements GameUnit {
         }
     }
     public void setGotDamage(double d){
-        gotDamage = d;
+        double hpPlus = defence/1000*1.5;
+        if (isDefence) {
+            gotDamage = (d - hpPlus)*0.4;
+            isDefence = false;
+        }
+        else {
+            gotDamage = d - hpPlus;
+        }
     }
     public double getGotDamage(){
         return gotDamage;
@@ -95,19 +101,21 @@ public class Hero implements GameUnit {
     }
 
     public boolean isEnoughMana(){
-        return mana >= 40;
+        return mana >= 20;
     }
 
     public double useMagic(){
-        int mm = (int)(Math.random()*6);
-        if (mm != miss){
-            mana -= 40;
-            return this.magicDamage;
-        }
-        else{
-            isMiss = true;
-            return 0;
-        }
+        if (isEnoughMana()) {
+            int mm = (int)(Math.random()*6);
+            if (mm != miss) {
+                mana -= 20;
+                return this.magicDamage;
+            } else {
+                isMiss = true;
+                mana -= 20;
+                return 0;
+            }
+        }else return -1;
     }
 
     public boolean isDefenced(){
@@ -123,4 +131,5 @@ public class Hero implements GameUnit {
     public boolean isDead(){
         return this.isDead;
     }
+
 }

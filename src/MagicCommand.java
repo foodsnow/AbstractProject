@@ -12,9 +12,15 @@ public class MagicCommand implements Command {
         if(hero.isEnoughMana()) {
             double magicDamage = this.hero.useMagic();
             monster.setGotDamage(magicDamage);
-            this.monster.setHealth(monster.getHealth() - magicDamage);
+            this.monster.setHealth(monster.getHealth() - monster.getGotDamage());
+
+            double monster_dam =  monster.getDamage();
+            hero.setGotDamage(monster_dam);
+            hero.setHealth(hero.getHealth() - hero.getGotDamage());
+
             System.out.println("Magic Spell "+hero.getMana());
         }else
             System.out.println("Not enough mana");
+
     }
 }
