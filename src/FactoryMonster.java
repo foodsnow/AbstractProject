@@ -76,4 +76,14 @@ public class FactoryMonster {
         }
         return view;
     }
+    public ImageView getMagic(){
+        ImageView view;
+        if (category == 1){
+            view = new ImageView("images/black_magic2.gif");
+        }
+        else {
+            view = new ImageView("images/black_magic3.gif");
+        }
+        return view;
+    }
 }

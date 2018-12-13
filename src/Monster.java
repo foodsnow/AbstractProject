@@ -1,9 +1,9 @@
 public class Monster implements GameUnit{
     private double attack,
-            defence,
-            health,
-            fullHP,
-            gotDamage = 0;
+                defence,
+                health,
+                fullHP,
+                gotDamage = 0;
     private int miss = 5,
                 criticalChance = 5;
     private boolean isDead = false,
@@ -25,22 +25,18 @@ public class Monster implements GameUnit{
         return fullHP;
     }
 
-    @Override
     public double getAttack() {return this.attack;}
-    @Override
+
     public double getCriticalChance() {return this.criticalChance;}
-    @Override
+
     public double getDefence() {return this.defence;}
-    @Override
+
     public double getHealth() {return this.health;}
-    @Override
+
     public void setAttack(double attack) { this.attack = attack;}
-    @Override
+
     public void setCriticalChance(int chance) {this.criticalChance = chance;}
-    @Override
-    public void increaseCriticalChance(double chance) {this.criticalChance += chance;}
-    @Override
-    public void decreaseCriticalChance(double chance) {this.criticalChance -= chance;}
+
     @Override
     public void setDefence(double defence) {this.defence = defence;}
     @Override
@@ -54,40 +50,52 @@ public class Monster implements GameUnit{
     }
     @Override
     public double getDamage() {
-        if (!isStunned) {
-            int mm = (int) (Math.random() * 6);
-            if (mm != this.miss) {
-                int cc = (int) (Math.random() * 6);
-                if (cc == this.criticalChance) {
-                    isCritical = true;
-                    System.out.println("Critical");
-                    return this.attack * 1.2;
-                } else
-                    return this.attack;
+        if (!isDead) {
+            if (!isStunned) {
+                int mm = (int) (Math.random() * 6);
+                if (mm != this.miss) {
+                    int cc = (int) (Math.random() * 6);
+                    if (cc == this.criticalChance) {
+                        isCritical = true;
+                        System.out.println("Critical");
+                        return this.attack * 1.2;
+                    } else{
+                        System.out.println("Monster damage success");
+                        return this.attack;}
+                } else {
+                    isMiss = true;
+                    System.out.println("Miss");
+                    return 0;
+                }
             } else {
-                isMiss = true;
-                System.out.println("Miss");
+                cleanStunned();
+                wasStunned = true;
                 return 0;
             }
-        }else {
-            cleanStunned();
-            wasStunned = true;
-            return 0;
         }
+        else
+            return 0;
     }
 
     public Drop giveDrop(){
         return this.drop;
     }
-
-    public void setGotDamage(double d){
-        if (!wasStunned) {
-            double hpPlus = defence / 1000 * 1.5;
-            gotDamage = d - hpPlus;
-        }else {
-            gotDamage = d;
-            wasStunned = false;
-        }
+    public void setGotDamage(double d, boolean missed){
+        if (!isDead) {
+            if (!missed) {
+                if (!wasStunned) {
+                    double hpPlus = defence / 1000 * 1.5;
+                    gotDamage = d - hpPlus;
+                } else {
+                    gotDamage = d;
+                    wasStunned = false;
+                }
+            }else {
+                gotDamage = 0;
+                wasStunned = false;
+            }
+        }else
+            gotDamage = 0;
     }
     public double getGotDamage(){
         return gotDamage;
@@ -114,12 +122,6 @@ public class Monster implements GameUnit{
     }
     public void setStunned(){
         isStunned = true;
-    }
-
-    @Override
-    public void cleanAll() {
-        this.cleanMiss();
-        this.cleanCritical();
     }
 
     public boolean isDead(){

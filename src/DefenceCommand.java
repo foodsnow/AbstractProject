@@ -12,10 +12,12 @@ public class DefenceCommand implements Command {
         this.hero.setIsDefenced(true);
 
         double monster_dam =  monster.getDamage();
-        hero.setGotDamage(monster_dam);
+        hero.setGotDamage(monster_dam, monster.isMissed());
         hero.setHealth(hero.getHealth() - hero.getGotDamage());
 
         this.monster.setStunned();
+
+        System.out.println("monster damage " + monster_dam);
         System.out.println("Defence was used");
     }
 }

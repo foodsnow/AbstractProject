@@ -3,7 +3,10 @@
     src: url('font/PressStart2P-Regular.ttf');
 }
 .maiN{
-	-fx-background-image: url("images/game_back.png");
+	-fx-background-image: url("images/back3.jpg");
+	-fx-background-repeat: stretch;
+	-fx-background-position: center center;
+	-fx-background-size: cover;
 }
 .box{
 	-fx-background-repeat: stretch;

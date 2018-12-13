@@ -1,18 +1,21 @@
+import javafx.scene.image.Image;
+
 public class Hero implements GameUnit {
     private double attack = 5,
                     defence = 250,
                     health = 100,
                     mana = 100,
                     magicDamage = 12,
-                    gotDamage = 0;
+                    gotDamage = 0,
+                    manaCost = 20;
     private int miss = 5,
                 criticalChance = 5;
     private boolean isDefence = false,
                     isDead = false,
                     isMiss = false,
                     isCritical = false;
+    private Image image = new Image("images/hero1.gif");
     private Inventory inventory;
-
 
     Hero(){
         inventory = new Inventory(this);
@@ -20,24 +23,20 @@ public class Hero implements GameUnit {
 
 
     public double getMana(){return this.mana;}
+
     public void setMana(double mana){this.mana = mana;}
-    @Override
+
     public double getAttack() {return this.attack;}
-    @Override
+
     public double getCriticalChance() {return this.criticalChance;}
-    @Override
+
     public double getDefence() {return this.defence;}
-    @Override
+
     public double getHealth() {return this.health;}
-    @Override
+
     public void setAttack(double attack) { this.attack = attack;}
-    @Override
+
     public void setCriticalChance(int chance) {this.criticalChance = chance;}
-    @Override
-    public void increaseCriticalChance(double chance) {this.criticalChance += chance;}
-    @Override
-    public void decreaseCriticalChance(double chance) {this.criticalChance -= chance;}
-    @Override
     public void setDefence(double defence) {this.defence = defence;}
     @Override
     public void setHealth(double health) {
@@ -51,32 +50,38 @@ public class Hero implements GameUnit {
 
     @Override
     public double getDamage() {
-        int mm = (int)(Math.random()*6);
-        if (mm != this.miss){
-            int cc = (int)(Math.random()*6);
-            if (cc == this.criticalChance){
-                isCritical = true;
-                System.out.println("Critical");
-                return this.attack*1.2;
+        if (!isDead) {
+            int mm = (int) (Math.random() * 6);
+            if (mm != this.miss) {
+                int cc = (int) (Math.random() * 6);
+                if (cc == this.criticalChance) {
+                    isCritical = true;
+                    System.out.println("Critical");
+                    return this.attack * 1.2;
+                } else
+                    return this.attack;
+            } else {
+                isMiss = true;
+                System.out.println("Miss");
+                return 0;
             }
-            else
-                return this.attack;
-        }
-        else{
-            isMiss = true;
-            System.out.println("Miss");
+        }else
             return 0;
-        }
     }
-    public void setGotDamage(double d){
-        double hpPlus = defence/1000*1.5;
-        if (isDefence) {
-            gotDamage = (d - hpPlus)*0.4;
-            isDefence = false;
-        }
-        else {
-            gotDamage = d - hpPlus;
-        }
+    public void setGotDamage(double d, boolean missed){
+        if (!isDead) {
+            if (!missed) {
+                double hpPlus = defence / 1000 * 1.5;
+                if (isDefence) {
+                    gotDamage = (d - hpPlus) * 0.4;
+                    isDefence = false;
+                } else {
+                    gotDamage = d - hpPlus;
+                }
+            }else
+                gotDamage = 0;
+        }else
+            gotDamage = 0;
     }
     public double getGotDamage(){
         return gotDamage;
@@ -95,27 +100,26 @@ public class Hero implements GameUnit {
     public void cleanMiss(){
         isMiss = false;
     }
-    public void cleanAll(){
-        this.cleanCritical();
-        this.cleanMiss();
-    }
 
     public boolean isEnoughMana(){
-        return mana >= 20;
+        return mana >= manaCost;
     }
 
     public double useMagic(){
-        if (isEnoughMana()) {
-            int mm = (int)(Math.random()*6);
-            if (mm != miss) {
-                mana -= 20;
-                return this.magicDamage;
-            } else {
-                isMiss = true;
-                mana -= 20;
-                return 0;
-            }
-        }else return -1;
+        if (!isDead) {
+            if (isEnoughMana()) {
+                int mm = (int) (Math.random() * 6);
+                if (mm != miss) {
+                    mana -= manaCost;
+                    return this.magicDamage;
+                } else {
+                    isMiss = true;
+                    mana -= manaCost;
+                    return 0;
+                }
+            } else return 0;
+        }else
+            return 0;
     }
 
     public boolean isDefenced(){
@@ -130,6 +134,10 @@ public class Hero implements GameUnit {
     }
     public boolean isDead(){
         return this.isDead;
+    }
+
+    public Image getImage(){
+        return image;
     }
 
 }
