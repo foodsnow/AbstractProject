@@ -24,6 +24,7 @@ public class FactoryMonster {
             }
         }
         int itemID = 1 + (int)(Math.random()*4);
+        System.out.println(array.size());
         System.out.println(itemID);
         Drop drop = new Drop(array, itemID);
         return drop;
@@ -75,5 +76,12 @@ public class FactoryMonster {
         }
         return view;
     }
-
+    public String getBackground(){
+        if (category == 1){
+            return "maiN1";
+        }else if (category == 2)
+            return "maiN2";
+        else
+            return "maiN3";
+    }
 }

@@ -16,7 +16,7 @@ import javafx.util.Duration;
 
 public class MenuPane extends BorderPane {
     MediaPlayer media = new MediaPlayer(new Media(getClass().getResource("music/Undertale - 001 - Once Upon A Time.mp3").toString()));
-    Label error = new Label("ERROR! at jaz nahy");
+    Label error = new Label("ERROR! at jaz");
     Button button = new Button("Start");
     TextField nickname = new TextField();
     FadeTransition menuFade;
@@ -24,7 +24,7 @@ public class MenuPane extends BorderPane {
 
     MenuPane(){
         Label title = new Label("Final Fantasy XS(europeika)");
-        title.setFont(new Font(54));
+        title.setStyle("-fx-font-size: 40;");
         title.getStyleClass().add("jen");
 
         nickname.setText("azichLOH");
@@ -44,7 +44,7 @@ public class MenuPane extends BorderPane {
         hpValue.setFont(new Font(35));
         Label manaValue = new Label("Mana: 100");
         manaValue.setFont(new Font(35));
-        Label attackValue = new Label("Damage: 5");
+        Label attackValue = new Label("Damage: 7");
         attackValue.setFont(new Font(35));
         Label magicValue = new Label("MagicDamage: 12");
         magicValue.setFont(new Font(35));
@@ -69,7 +69,7 @@ public class MenuPane extends BorderPane {
         menuFade.setToValue(1);
         menuFade.setCycleCount(1);
 
-        menuFadeOut = new FadeTransition(Duration.millis(4000), this);
+        menuFadeOut = new FadeTransition(Duration.millis(3000), this);
         menuFadeOut.setFromValue(1);
         menuFadeOut.setToValue(0);
         menuFadeOut.setCycleCount(1);

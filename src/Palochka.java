@@ -3,6 +3,7 @@ public class Palochka extends Hero {
 
     public Palochka(Hero p){
         this.hero = p;
+        this.setName(hero.getName());
         setInventory(hero.getInventory());
         getInventory().setHero(this);
     }

@@ -37,7 +37,6 @@ public class Game extends Application {
     private MediaPlayer background_music;
     private MediaPlayer menu_player;
 
-    static int c = 0;
 
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
@@ -71,7 +70,7 @@ public class Game extends Application {
         arrow.setFitWidth(70);
         arrow.setFitHeight(50);
 
-        ImageView magic_animation = new ImageView("images/magic_blow.gif");
+        ImageView magic_animation = new ImageView("images/magic6.gif");
         magic_animation.setFitHeight(300);
         magic_animation.setFitWidth(300);
         magic_animation.setVisible(false);
@@ -139,7 +138,6 @@ public class Game extends Application {
 
         HBox top = new HBox(5);
         BorderPane upper = new BorderPane();
-        upper.setStyle("-fx-border-color: black;");
         Label descriptioner = new Label("Ready?");
         descriptioner.setStyle("-fx-padding: 8;");
         Pane desc_table = new Pane(descriptioner);
@@ -273,7 +271,7 @@ public class Game extends Application {
 
 
         //Class list
-        borderPane.getStyleClass().add("maiN");
+        borderPane.getStyleClass().add(factoryMonster.getBackground());
         action_scene.getStyleClass().addAll("box");
         top.getStyleClass().add("toRight");
         manaBar.getStyleClass().addAll("mana");
@@ -302,13 +300,13 @@ public class Game extends Application {
         monster_desk.getStyleClass().addAll("toLeft");
         desc_table.getStyleClass().add("bottomNav");
         descriptioner.getStyleClass().add("text");
+        descriptioner.setStyle("-fx-font-size: 18; -fx-padding: 10;");
         //
 
         manaBar.setProgress(100);
         healthBar.setProgress(100);
         monsterHealthBar.setProgress(100);
 
-        action_scene.setGridLinesVisible(true);
 
         //Binding
         cell1.prefWidthProperty().bind(action_scene.widthProperty());
@@ -383,7 +381,7 @@ public class Game extends Application {
                             magic.setDisable(true);
                         }
                         if (monster.isDead()) {
-                            descriptioner.setText("CHEST: Nice job, dude. I have " + getLootList(monster));
+                            descriptioner.setText("CHEST:NICE JOB, BODY. I have " + getLootList(monster));
                             disableAll(attack,defence,magic,HPitem,MPitem);
                         }else
                             descriptioner.setText("...");
@@ -409,7 +407,7 @@ public class Game extends Application {
                             next.setDisable(false);
                         }
                         if (!isStunned){
-                            descriptioner.setText("Monster: Curse will reach you, "+hero.getName()+"...");
+                            descriptioner.setText("Monster: Curse will reach you soon, "+hero.getName()+"...");
                             black_magic_animation.setVisible(true);
                         }
 
@@ -478,7 +476,7 @@ public class Game extends Application {
                     attack_effect.setOnFinished(e -> {
 
                         if (!isStunned){
-                            descriptioner.setText("Monster: Curse will reach you, "+hero.getName()+"...");
+                            descriptioner.setText("Monster: Curse will reach you soon, "+hero.getName()+"...");
                             black_magic_animation.setVisible(true);
                             healthBar.setProgress(hero.getHealth()/100);
                         }
@@ -534,7 +532,7 @@ public class Game extends Application {
 
                         descriptioner.setText("...");
                         if (monster.isDead()) {
-                            descriptioner.setText("CHEST: Nice job, dude. I have " + getLootList(monster));
+                            descriptioner.setText("CHEST:NICE JOB, BODY. I have " + getLootList(monster));
                             disableAll(attack,defence,magic,HPitem,MPitem);
                         }
                         if (hero.isEnoughMana()){
@@ -561,13 +559,12 @@ public class Game extends Application {
                         damage_monster_shake.shake();
 
                         if (monster.isDead()){
-                            descriptioner.setText("Monster: HOW?!, HERO YOU MOTHERFU....");
                             OnMonsterDeath(monster_image, treasure);
                             next.setDisable(false);
                         }
 
                         if (!isStunned){
-                            descriptioner.setText("Monster: Curse will reach you, "+hero.getName()+"...");
+                            descriptioner.setText("Monster: Curse will reach you soon, "+hero.getName()+"...");
                             black_magic_animation.setVisible(true);
                         }
 
@@ -689,16 +686,24 @@ public class Game extends Application {
     String getLootList(Monster monster){
         Drop drop = monster.giveDrop();
         String item = "";
+        int HP = 0;
+        int MP = 0;
+        for (Attribute i: drop.getDrop()){
+            if (i.getAttributeID() == 0)
+                HP++;
+            else if (i.getAttributeID() == 1)
+                MP++;
+        }
         int i = drop.getItemID();
         if (i == 1){
-            item = "Axe +9 to attack";
+            item = "Axe +10 to attack";
         }else if(i == 2){
             item = "PALOCHKA +8 TO MAGIC!!!!";
         }else if (i == 3){
-            item = "Armor +150 to defence";
+            item = "Armor +250 to defence";
         }else
-            item = "THAT's ALL!!!";
-        return item + ". HaHaHa!!";
+            item = "...THAT's ALL!!!";
+        return HP+" HP," + MP + " MP," + item + ".BYE!!HaHaHa!!";
     }
 
     FadeTransition trans(Label text){

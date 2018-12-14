@@ -2,8 +2,22 @@
     font-family: 'Press Start 2P', cursive;
     src: url('font/PressStart2P-Regular.ttf');
 }
-.maiN{
-	-fx-background-image: url("images/back4.jpg");
+.maiN1{
+	-fx-background-image: url("images/back6.png");
+	-fx-background-repeat: stretch;
+	-fx-background-position: center center;
+	-fx-background-size: cover;
+	-fx-background-color: black;
+}
+.maiN2{
+	-fx-background-image: url("images/back12.png");
+	-fx-background-repeat: stretch;
+	-fx-background-position: center center;
+	-fx-background-size: cover;
+	-fx-background-color: black;
+}
+.maiN3{
+	-fx-background-image: url("images/back9.png");
 	-fx-background-repeat: stretch;
 	-fx-background-position: center center;
 	-fx-background-size: cover;
@@ -51,7 +65,6 @@
 .stat{
 	-fx-padding: 30 0 0 0;
 	-fx-pref-width: 100;
-	-fx-border-color: black;
 }
 .ver{
 	-fx-alignment: bottom-center;

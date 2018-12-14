@@ -3,12 +3,13 @@ public class Axe extends Hero {
 
     public Axe(Hero p){
         this.hero = p;
+        this.setName(hero.getName());
         setInventory(hero.getInventory());
         getInventory().setHero(this);
     }
 
     public double getAttack(){
-        return this.hero.getAttack() + 9;
+        return this.hero.getAttack() + 10;
     }
 
     public double getMagicDamage(){
