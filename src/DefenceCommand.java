@@ -12,7 +12,7 @@ public class DefenceCommand implements Command {
         this.hero.setIsDefenced(true);
 
         double monster_dam =  monster.getDamage();
-        hero.setGotDamage(monster_dam, monster.isMissed());
+        hero.setGotDamage(monster_dam, monster.isMissed() || monster.isDead());
         hero.setHealth(hero.getHealth() - hero.getGotDamage());
 
         this.monster.setStunned();

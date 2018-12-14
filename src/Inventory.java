@@ -10,6 +10,9 @@ public class Inventory {
         this.bagMP = new ArrayList<>();
         this.hero = hero;
     }
+    public void setHero(Hero hero){
+        this.hero = hero;
+    }
     public void loot(Drop drop){
         for (Attribute i: drop.getDrop()){
             if (i.getAttributeID() == 0){

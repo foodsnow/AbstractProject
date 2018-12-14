@@ -7,17 +7,22 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.util.Duration;
 
 import java.sql.Time;
 
 public class YourAreDeadScene extends StackPane{
     FadeTransition fade;
+    Button goHome;
 
     YourAreDeadScene(){
-        VBox hBox = new VBox(5);
+        VBox hBox = new VBox(30);
+        hBox.prefWidthProperty().bind(this.widthProperty());
+        hBox.prefHeightProperty().bind(this.heightProperty());
         Label desc = new Label("Game Over");
-        Button goHome = new Button("go home");
+        desc.setStyle("-fx-font-size: 50;");
+        goHome = new Button("go home");
 
         FadeTransition blink = new FadeTransition(Duration.millis(3000), desc);
         blink.setCycleCount(Timeline.INDEFINITE);
@@ -27,7 +32,7 @@ public class YourAreDeadScene extends StackPane{
         blink.play();
 
         this.setOpacity(1);
-        fade = new FadeTransition(Duration.millis(5000), this);
+        fade = new FadeTransition(Duration.millis(4000), this);
         fade.setFromValue(0);
         fade.setToValue(1);
         fade.setCycleCount(1);
@@ -42,5 +47,12 @@ public class YourAreDeadScene extends StackPane{
         this.getChildren().addAll(hBox);
 
 
+    }
+    public Button getButton(){
+        return goHome;
+    }
+
+    public FadeTransition getFade() {
+        return fade;
     }
 }

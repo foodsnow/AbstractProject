@@ -3,10 +3,11 @@
     src: url('font/PressStart2P-Regular.ttf');
 }
 .maiN{
-	-fx-background-image: url("images/back3.jpg");
+	-fx-background-image: url("images/back4.jpg");
 	-fx-background-repeat: stretch;
 	-fx-background-position: center center;
 	-fx-background-size: cover;
+	-fx-background-color: black;
 }
 .box{
 	-fx-background-repeat: stretch;
@@ -106,8 +107,14 @@
 }
 .over{
 	-fx-alignment: center;
-	background-color: black;
+	-fx-background-color: black;
 }
 .container{
 	-fx-alignment: center;
+}
+.nickname{
+	-fx-background-color: black;
+	-fx-font-family: 'Press Start 2P', cursive;
+	-fx-font-size: 20;
+	-fx-text-fill: white;
 }

@@ -1,5 +1,5 @@
 public class ManaAttribute implements Attribute{
-    int mana=5;
+    int mana=15;
     int id = 1;
 
     @Override

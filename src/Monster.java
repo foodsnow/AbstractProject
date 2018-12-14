@@ -1,3 +1,6 @@
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 public class Monster implements GameUnit{
     private double attack,
                 defence,
@@ -12,13 +15,17 @@ public class Monster implements GameUnit{
                     isStunned = false,
                     wasStunned = false;
     private Drop drop;
+    private Image image, treasureImage;
 
-    Monster(double attack, double health, double defence, Drop drop){
+
+    Monster(double attack, double health, double defence, Drop drop, Image image){
         this.attack = attack;
         this.health = health;
         this.defence = defence;
         this.drop = drop;
         this.fullHP = health;
+        this.image = image;
+        treasureImage = new Image("images/loot1.gif");
     }
 
     public double getFullHP(){
@@ -128,5 +135,10 @@ public class Monster implements GameUnit{
         return this.isDead;
     }
 
-
+    public Image getImage() {
+        return image;
+    }
+    public Image getTreasureImage() {
+        return treasureImage;
+    }
 }

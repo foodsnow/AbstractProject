@@ -10,11 +10,11 @@ public class AttackCommand implements Command {
     @Override
     public void execute() {
         double damege = hero.getDamage();
-        monster.setGotDamage(damege, hero.isMissed());
+        monster.setGotDamage(damege, hero.isMissed() || hero.isDead());
         monster.setHealth(monster.getHealth() - monster.getGotDamage());
 
         double monster_dam =  monster.getDamage();
-        hero.setGotDamage(monster_dam, monster.isMissed());
+        hero.setGotDamage(monster_dam, monster.isMissed() || monster.isDead());
         hero.setHealth(hero.getHealth() - hero.getGotDamage());
 
 

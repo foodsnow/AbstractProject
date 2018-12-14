@@ -1,11 +1,26 @@
 public class Axe extends Hero {
-    Hero p;
+    private Hero hero;
 
-    Axe(Hero p){
-        this.p = p;
+    public Axe(Hero p){
+        this.hero = p;
+        setInventory(hero.getInventory());
+        getInventory().setHero(this);
+    }
+
+    public double getAttack(){
+        return this.hero.getAttack() + 9;
+    }
+
+    public double getMagicDamage(){
+        return this.hero.getMagicDamage();
+    }
+
+    public double getDefence() {
+        return this.hero.getDefence();
     }
 
     @Override
-    public double getDamage() {return this.p.getAttack() + 50;}
-
+    public Inventory getInventory() {
+        return hero.getInventory();
+    }
 }

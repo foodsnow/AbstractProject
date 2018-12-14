@@ -11,11 +11,11 @@ public class MagicCommand implements Command {
     public void execute() {
         if(hero.isEnoughMana()) {
             double magicDamage = this.hero.useMagic();
-            monster.setGotDamage(magicDamage, hero.isMissed());
+            monster.setGotDamage(magicDamage, hero.isMissed() || hero.isDead());
             this.monster.setHealth(monster.getHealth() - monster.getGotDamage());
 
             double monster_dam =  monster.getDamage();
-            hero.setGotDamage(monster_dam, monster.isMissed());
+            hero.setGotDamage(monster_dam, monster.isMissed() || monster.isDead());
             hero.setHealth(hero.getHealth() - hero.getGotDamage());
 
 

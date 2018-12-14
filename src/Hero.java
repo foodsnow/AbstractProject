@@ -1,7 +1,11 @@
 import javafx.scene.image.Image;
 
 public class Hero implements GameUnit {
-    private double attack = 5,
+    private String name = "player";
+    String attack_desc = "ESHKERE!!!!!!";
+    String defence_decs = "My grandma beats me harder";
+    String magic_desc = "AVADA KETABRA";
+    private double attack = 7,
                     defence = 250,
                     health = 100,
                     mana = 100,
@@ -17,10 +21,20 @@ public class Hero implements GameUnit {
     private Image image = new Image("images/hero1.gif");
     private Inventory inventory;
 
+    Hero(String name, Inventory inventory){
+        inventory = new Inventory(this);
+        this.name = name;
+    }
     Hero(){
         inventory = new Inventory(this);
     }
 
+    public void setName(String name ){
+        this.name = name;
+    }
+    public String getName(){
+        return this.name;
+    }
 
     public double getMana(){return this.mana;}
 
@@ -30,7 +44,9 @@ public class Hero implements GameUnit {
 
     public double getCriticalChance() {return this.criticalChance;}
 
-    public double getDefence() {return this.defence;}
+    public double getDefence() {
+        return this.defence;
+    }
 
     public double getHealth() {return this.health;}
 
@@ -47,7 +63,9 @@ public class Hero implements GameUnit {
             System.out.println("Hero is dead");
         }
     }
-
+    public double getMagicDamage(){
+        return magicDamage;
+    }
     @Override
     public double getDamage() {
         if (!isDead) {
@@ -57,9 +75,9 @@ public class Hero implements GameUnit {
                 if (cc == this.criticalChance) {
                     isCritical = true;
                     System.out.println("Critical");
-                    return this.attack * 1.2;
+                    return getAttack() * 1.2;
                 } else
-                    return this.attack;
+                    return getAttack();
             } else {
                 isMiss = true;
                 System.out.println("Miss");
@@ -71,7 +89,7 @@ public class Hero implements GameUnit {
     public void setGotDamage(double d, boolean missed){
         if (!isDead) {
             if (!missed) {
-                double hpPlus = defence / 1000 * 1.5;
+                double hpPlus = getDefence()/ 1000 * 1.5;
                 if (isDefence) {
                     gotDamage = (d - hpPlus) * 0.4;
                     isDefence = false;
@@ -111,7 +129,7 @@ public class Hero implements GameUnit {
                 int mm = (int) (Math.random() * 6);
                 if (mm != miss) {
                     mana -= manaCost;
-                    return this.magicDamage;
+                    return getMagicDamage();
                 } else {
                     isMiss = true;
                     mana -= manaCost;
@@ -131,6 +149,9 @@ public class Hero implements GameUnit {
     }
     public Inventory getInventory() {
         return inventory;
+    }
+    public void setInventory(Inventory inventory){
+        this.inventory = inventory;
     }
     public boolean isDead(){
         return this.isDead;

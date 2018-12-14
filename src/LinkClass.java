@@ -19,4 +19,14 @@ public class LinkClass {
             hero.getInventory().loot(monster.giveDrop());
         }
     }
+    public int getItemID(){
+        return monster.giveDrop().getItemID();
+    }
+    public Monster getMonster(){
+        return monster;
+    }
+
+    public Hero getHero() {
+        return hero;
+    }
 }
